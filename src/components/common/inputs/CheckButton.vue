@@ -1,8 +1,13 @@
 <template>
   <div>
-    <label :class="{ checked: value }">
+    <label :class="{ checked: value, focus: focus }">
       <span>항목1</span>
-      <input type="checkbox" v-model="value" />
+      <input
+        type="checkbox"
+        v-model="value"
+        @focus="focus = true"
+        @focusout="focus = false"
+      />
     </label>
   </div>
 </template>
@@ -13,6 +18,7 @@ import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class CheckButton extends Vue {
   private readonly value = false;
+  private focus = false;
 }
 </script>
 
@@ -24,13 +30,18 @@ label {
 }
 
 input {
+  overflow: hidden;
   width: 0;
   height: 0;
-  overflow: hidden;
-  visibility: hidden;
+  opacity: 0;
+  font-size: 0;
 }
 
 label.checked {
   color: #6789ec;
+}
+
+label.focus {
+  text-decoration: underline;
 }
 </style>
