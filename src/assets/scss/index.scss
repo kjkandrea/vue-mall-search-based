@@ -1,7 +1,16 @@
 @import "~normalize.css";
+@import "variable/index";
 @import "layout";
+@import "typograph";
+@import "element/index";
 
 html {
   font-size: 16px;
   background-color: #e8eaed;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

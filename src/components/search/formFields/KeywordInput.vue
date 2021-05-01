@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" maxlength="50" />
-    <button type="submit">submit</button>
+    <button type="submit">검색</button>
   </div>
 </template>
 
@@ -11,3 +11,14 @@ import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class KeywordInput extends Vue {}
 </script>
+
+<style scoped>
+input {
+  width: calc(100% - 100px);
+}
+
+button {
+  width: 95px;
+  margin-left: 5px;
+}
+</style>

@@ -1,5 +1,7 @@
 <template>
-  <check-buttons />
+  <div>
+    <check-buttons />
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,3 +12,9 @@ import CheckButtons from "../../common/inputs/CheckButtons.vue";
 })
 export default class ProductFilter extends Vue {}
 </script>
+
+<style scoped>
+div {
+  margin-top: 5px;
+}
+</style>

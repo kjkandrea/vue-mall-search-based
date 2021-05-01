@@ -1,6 +1,6 @@
 <template>
   <dl>
-    <dt>title</dt>
+    <dt>조건</dt>
     <dd>
       <check-button />
     </dd>
@@ -15,3 +15,18 @@ import CheckButton from "./CheckButton.vue";
 })
 export default class CheckButtons extends Vue {}
 </script>
+
+<style scoped>
+dl {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+dt {
+  width: 60px;
+  font-weight: 600;
+}
+</style>
