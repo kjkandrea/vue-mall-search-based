@@ -1,13 +1,17 @@
 <template>
   <dl>
     <dt>title</dt>
-    <dd>inputs</dd>
+    <dd>
+      <check-button />
+    </dd>
   </dl>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-
-@Component
+import CheckButton from "./CheckButton.vue";
+@Component({
+  components: { CheckButton },
+})
 export default class CheckButtons extends Vue {}
 </script>
