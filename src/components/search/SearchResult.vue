@@ -16,7 +16,7 @@ export default class SearchResult extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .no-result {
   padding: 3rem;
   margin-top: 10px;
