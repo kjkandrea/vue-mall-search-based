@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import KeywordInput from "./searchForm/KeywordInput.vue";
+import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
 @Component({
   components: { ProductFilter, KeywordInput },
