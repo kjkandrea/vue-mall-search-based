@@ -1,7 +1,7 @@
-@import url("~normalize.css");
-@import url("./layout.scss");
+@import "~normalize.css";
+@import "layout";
 
 html {
   font-size: 16px;
-  background-color: #f5f5f5;
+  background-color: #e8eaed;
 }
