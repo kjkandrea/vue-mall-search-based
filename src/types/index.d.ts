@@ -22,6 +22,7 @@ export interface FilterRequest {
 }
 
 export interface FilterResponse {
+  keyword: string;
   filters: Filter[];
 }
 
