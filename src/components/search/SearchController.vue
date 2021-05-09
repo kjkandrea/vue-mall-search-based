@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <keyword-input :keyword.sync="query.keyword" />
-    <product-filter :data="filter" />
+    <product-filter :filter.sync="query.filters" :data="filter" />
   </form>
 </template>
 
@@ -21,6 +21,7 @@ import filterModel from "../../models/FilterModel";
 export default class SearchController extends Vue {
   private query: SearchRequest = {
     keyword: "",
+    filters: {},
   };
 
   private filter: Filter[] = [];

@@ -28,5 +28,6 @@ export interface FilterResponse {
 
 export interface Filter {
   title: string;
+  name: string;
   options: string[];
 }

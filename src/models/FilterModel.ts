@@ -4,14 +4,17 @@ class FilterModel {
   private readonly data: Filter[] = [
     {
       title: "브랜드",
+      name: "brand",
       options: ["브랜드 1", "브랜드 2", "브랜드 3"],
     },
     {
       title: "색상",
+      name: "color",
       options: ["red", "blue", "green", "white", "black"],
     },
     {
       title: "사이즈",
+      name: "size",
       options: ["85", "90", "95", "100", "105", "110"],
     },
   ];

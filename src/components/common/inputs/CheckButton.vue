@@ -13,6 +13,7 @@
         type="checkbox"
         :value="option"
         v-model="selectedValues"
+        @change="$emit('check', selectedValues)"
         @focus="onFocus(option)"
         @focusout="onFocusOut()"
       />
@@ -21,10 +22,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Model } from "vue-property-decorator";
 
 @Component
 export default class CheckButton extends Vue {
+  @Model("check")
+  private readonly value!: string[];
   @Prop({ required: true })
   private readonly data!: string[];
 
