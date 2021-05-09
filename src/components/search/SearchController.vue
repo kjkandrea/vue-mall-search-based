@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmitQuery">
+  <form @submit.prevent="onSubmit">
     <keyword-input :keyword.sync="query.keyword" />
     <product-filter />
   </form>
@@ -9,17 +9,27 @@
 import { Vue, Component } from "vue-property-decorator";
 import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
-import { SearchRequest } from "../../types";
+import { isEqual } from "lodash";
+
 @Component({
   components: { ProductFilter, KeywordInput },
 })
 export default class SearchController extends Vue {
-  private query: SearchRequest = {
+  private query = {
     keyword: "",
   };
 
-  private onSubmitQuery() {
-    console.log(this.query);
+  private onSubmit() {
+    this.pushQuery();
+  }
+
+  private pushQuery(): void {
+    const equal = isEqual(this.$route.query, this.query);
+
+    if (equal) return;
+    this.$router.push({
+      query: this.query,
+    });
   }
 }
 </script>
