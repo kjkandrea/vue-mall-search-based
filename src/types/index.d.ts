@@ -9,7 +9,7 @@ export interface SearchFilter {
   color: Color;
 }
 
-export type Size = "85" | "90" | "95" | "100" | "105" | "110";
+export type Size = 85 | 90 | 95 | 100 | 105 | 110;
 
 export type Color = "red" | "green" | "blue" | "white" | "black";
 
