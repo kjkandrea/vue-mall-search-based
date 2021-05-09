@@ -1,19 +1,23 @@
 <template>
   <dl>
-    <dt>조건</dt>
+    <dt>{{ data.title }}</dt>
     <dd>
-      <check-button />
+      <check-button :data="data.options" />
     </dd>
   </dl>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import CheckButton from "./CheckButton.vue";
+import { Filter } from "../../../types";
 @Component({
   components: { CheckButton },
 })
-export default class CheckButtons extends Vue {}
+export default class CheckButtons extends Vue {
+  @Prop({ required: true })
+  private readonly data!: Filter;
+}
 </script>
 
 <style scoped>

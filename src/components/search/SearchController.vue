@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <keyword-input :keyword.sync="query.keyword" />
-    <product-filter />
+    <product-filter :data="filter" />
   </form>
 </template>
 
@@ -10,7 +10,7 @@ import { Vue, Component } from "vue-property-decorator";
 import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
 import { isEqual } from "lodash";
-import { SearchRequest } from "../../types";
+import { Filter, SearchRequest } from "../../types";
 import { Dictionary } from "vue-router/types/router";
 import searchModel from "../../models/SearchModel";
 import filterModel from "../../models/FilterModel";
@@ -22,6 +22,8 @@ export default class SearchController extends Vue {
   private query: SearchRequest = {
     keyword: "",
   };
+
+  private filter: Filter[] = [];
 
   created(): void {
     const hasQuery = this.initQuery();
@@ -64,7 +66,7 @@ export default class SearchController extends Vue {
 
   private async searchFilter() {
     const { data } = await filterModel.get(this.query);
-    console.log(data);
+    this.filter = data;
   }
 }
 </script>
