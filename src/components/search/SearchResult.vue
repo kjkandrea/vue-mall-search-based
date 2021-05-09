@@ -30,4 +30,8 @@ export default class SearchResult extends Vue {
   margin-top: 10px;
   border: 1px dashed #ddd;
 }
+
+ul li {
+  list-style: none;
+}
 </style>
