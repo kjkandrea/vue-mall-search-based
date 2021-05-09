@@ -1,8 +1,10 @@
 <template>
   <div class="result">
-    <div v-if="data.length > 0">
-      {{ data }}
-    </div>
+    <ul v-if="data.length > 0">
+      <li v-for="(item, idx) in data" :key="idx">
+        <product-item :data="item" />
+      </li>
+    </ul>
     <div v-else class="no-result">
       <p><strong>검색결과</strong>가 없습니다.</p>
     </div>
@@ -12,8 +14,10 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Product } from "../../types";
-
-@Component
+import ProductItem from "./result/ProductItem.vue";
+@Component({
+  components: { ProductItem },
+})
 export default class SearchResult extends Vue {
   @Prop({ required: true })
   private readonly data!: Product[];
