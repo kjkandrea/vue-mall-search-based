@@ -1,7 +1,11 @@
 <template>
   <form @submit.prevent="onSubmit">
     <keyword-input :keyword.sync="query.keyword" />
-    <product-filter :filter.sync="query.filters" :data="filter" />
+    <product-filter
+      :filter.sync="query.filters"
+      :data="filter"
+      @change:query="onSubmit"
+    />
   </form>
 </template>
 
@@ -11,7 +15,6 @@ import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
 import { isEqual } from "lodash";
 import { Filter, SearchRequest } from "../../types";
-import { Dictionary } from "vue-router/types/router";
 import searchModel from "../../models/SearchModel";
 import filterModel from "../../models/FilterModel";
 
@@ -55,8 +58,12 @@ export default class SearchController extends Vue {
     const equal = isEqual(this.$route.query, this.query);
 
     if (equal) return;
+    console.log(this.query.filters);
     this.$router.push({
-      query: this.query as Dictionary<string>,
+      query: {
+        keyword: this.query.keyword,
+        ...this.query.filters,
+      },
     });
   }
 
@@ -66,7 +73,9 @@ export default class SearchController extends Vue {
   }
 
   private async searchFilter() {
-    const { data } = await filterModel.get(this.query);
+    const { keyword } = this.query;
+    if (keyword === undefined) return;
+    const { data } = await filterModel.get({ keyword });
     this.filter = data;
   }
 }

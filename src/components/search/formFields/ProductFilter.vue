@@ -4,7 +4,8 @@
       v-for="(item, idx) in data"
       :key="idx"
       :data="item"
-      v-model="filterSync[item.name]"
+      v-model="checkedFilter[item.name]"
+      @check="bindFilterData"
     />
   </div>
 </template>
@@ -13,6 +14,14 @@
 import { Vue, Component, Prop, PropSync, Watch } from "vue-property-decorator";
 import CheckButtons from "../../common/inputs/CheckButtons.vue";
 import { Filter } from "../../../types";
+
+const objectMap = <ValueType, MappedValueType>(
+  object: { [key: string]: ValueType },
+  callback: (value: ValueType, key?: string, index?: number) => MappedValueType
+) =>
+  Object.fromEntries(
+    Object.entries(object).map(([k, v], i) => [k, callback(v, k, i)])
+  );
 
 @Component({
   components: { CheckButtons },
@@ -23,6 +32,8 @@ export default class ProductFilter extends Vue {
   @PropSync("filter", { required: true })
   private filterSync!: { [key: string]: string };
 
+  private checkedFilter: { [key: string]: string[] } = {};
+
   @Watch("data")
   changedData(value: Filter[]): void {
     if (value.length > 0) this.initFilter();
@@ -31,9 +42,23 @@ export default class ProductFilter extends Vue {
 
   private initFilter() {
     Object.assign(
-      this.filterSync,
+      this.checkedFilter,
       ...this.data.map(({ name }) => ({ [name]: [] }))
     );
+  }
+
+  private bindFilterData() {
+    const mappedFilter = objectMap<string[], string>(
+      this.checkedFilter,
+      (value) => value.toLocaleString()
+    );
+
+    Object.keys(mappedFilter).forEach((key) => {
+      if (!mappedFilter[key]) delete mappedFilter[key];
+    });
+
+    Object.assign(this.filterSync, mappedFilter);
+    this.$emit("change:query");
   }
 }
 </script>
