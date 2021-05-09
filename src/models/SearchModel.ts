@@ -55,9 +55,11 @@ class SearchModel {
   public get(request: SearchRequest): Promise<{ data: Product[] }> {
     const { keyword } = request;
     return new Promise((resolve) => {
-      if (keyword === undefined) throw new Error("keyword empty");
-      const keywordResult = this.keywordSearch(keyword);
-      setTimeout(() => resolve({ data: keywordResult }), 200);
+      setTimeout(() => {
+        if (keyword === undefined) throw new Error("keyword empty");
+        const keywordResult = this.keywordSearch(keyword);
+        return resolve({ data: keywordResult });
+      }, 200);
     });
   }
 
@@ -67,5 +69,3 @@ class SearchModel {
 }
 
 export default new SearchModel();
-
-export const asd = "1";

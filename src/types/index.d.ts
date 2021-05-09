@@ -16,3 +16,17 @@ export interface Product {
   size?: Size;
   color?: Color;
 }
+
+export interface FilterRequest {
+  keyword: string;
+}
+
+export interface FilterResponse {
+  keyword: string;
+  filters: Filter[];
+}
+
+export interface Filter {
+  title: string;
+  options: string[];
+}
