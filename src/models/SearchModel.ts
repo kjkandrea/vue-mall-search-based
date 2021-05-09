@@ -1,11 +1,7 @@
-import { Product } from "../types";
+import { Product, SearchRequest } from "../types";
 
-interface SearchModel {
-  data: Product[];
-}
-
-const searchModel: SearchModel = {
-  data: [
+class SearchModel {
+  private readonly data: Product[] = [
     {
       title: "트랜치 코트",
       price: 950000,
@@ -48,5 +44,20 @@ const searchModel: SearchModel = {
       size: 90,
       color: "red",
     },
-  ],
-};
+  ];
+
+  public get(request: SearchRequest): Promise<Product[]> {
+    const { keyword } = request;
+    return new Promise((resolve) => {
+      if (keyword === undefined) throw new Error("keyword empty");
+      const keywordResult = this.keywordSearch(keyword);
+      setTimeout(() => resolve(keywordResult), 200);
+    });
+  }
+
+  private keywordSearch(keyword: string): Product[] {
+    return this.data.filter(({ title }) => title.includes(keyword));
+  }
+}
+
+export default new SearchModel();

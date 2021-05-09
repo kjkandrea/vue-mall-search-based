@@ -1,5 +1,5 @@
 export interface SearchRequest {
-  keyword: string;
+  keyword?: string;
   filters?: SearchFilter;
 }
 
