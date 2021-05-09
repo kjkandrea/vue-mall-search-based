@@ -23,14 +23,19 @@ export default class SearchController extends Vue {
   };
 
   created(): void {
-    this.initQuery();
+    const hasQuery = this.initQuery();
+    if (hasQuery) this.search();
   }
 
-  private initQuery(): void {
+  /**
+   * @return default search query includes
+   */
+  private initQuery(): boolean {
     const queryBuffet = this.$route.query;
     const { keyword } = queryBuffet;
-    if (!keyword) return;
+    if (!keyword) return false;
     this.query.keyword = keyword.toString();
+    return true;
   }
 
   private onSubmit() {
