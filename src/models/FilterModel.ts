@@ -5,7 +5,7 @@ class FilterModel {
     {
       title: "브랜드",
       name: "brand",
-      options: ["브랜드 1", "브랜드 2", "브랜드 3"],
+      options: ["burberry", "hazzys", "karenin"],
     },
     {
       title: "색상",
@@ -23,7 +23,9 @@ class FilterModel {
     return new Promise((resolve) => {
       setTimeout(() => {
         if (keyword === undefined) throw new Error("keyword empty");
-        return resolve({ data: this.data });
+        return keyword.includes("코트")
+          ? resolve({ data: this.data })
+          : resolve({ data: [] });
       }, 200);
     });
   }
