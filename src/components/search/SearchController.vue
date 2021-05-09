@@ -13,6 +13,7 @@ import { isEqual } from "lodash";
 import { SearchRequest } from "../../types";
 import { Dictionary } from "vue-router/types/router";
 import searchModel from "../../models/SearchModel";
+import filterModel from "../../models/FilterModel";
 
 @Component({
   components: { ProductFilter, KeywordInput },
@@ -24,7 +25,10 @@ export default class SearchController extends Vue {
 
   created(): void {
     const hasQuery = this.initQuery();
-    if (hasQuery) this.search();
+    if (hasQuery) {
+      this.searchProduct();
+      this.searchFilter();
+    }
   }
 
   /**
@@ -40,7 +44,8 @@ export default class SearchController extends Vue {
 
   private onSubmit() {
     this.pushQuery();
-    this.search();
+    this.searchProduct();
+    this.searchFilter();
   }
 
   private pushQuery(): void {
@@ -52,9 +57,14 @@ export default class SearchController extends Vue {
     });
   }
 
-  private async search() {
+  private async searchProduct() {
     const { data } = await searchModel.get(this.query);
     this.$emit("search:response", data);
+  }
+
+  private async searchFilter() {
+    const { data } = await filterModel.get(this.query);
+    console.log(data);
   }
 }
 </script>
