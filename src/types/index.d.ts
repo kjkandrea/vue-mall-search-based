@@ -1,12 +1,12 @@
 export interface SearchRequest {
   keyword: string;
-  filters: SearchFilter;
+  filters?: SearchFilter;
 }
 
 export interface SearchFilter {
-  brand: string;
-  size: Size;
-  color: Color;
+  brand?: string;
+  size?: Size;
+  color?: Color;
 }
 
 export type Size = 85 | 90 | 95 | 100 | 105 | 110;
@@ -22,4 +22,6 @@ export interface Product {
   title: string;
   price: number;
   imageUrl: string;
+  size?: Size;
+  color?: Color;
 }
