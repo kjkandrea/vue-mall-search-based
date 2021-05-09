@@ -18,8 +18,10 @@ class FilterModel {
 
   public get({ keyword }: FilterRequest): Promise<{ data: Filter[] }> {
     return new Promise((resolve) => {
-      if (keyword === undefined) throw new Error("keyword empty");
-      setTimeout(() => resolve({ data: this.data }), 200);
+      setTimeout(() => {
+        if (keyword === undefined) throw new Error("keyword empty");
+        return resolve({ data: this.data });
+      }, 200);
     });
   }
 }
