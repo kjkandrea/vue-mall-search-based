@@ -12,6 +12,7 @@ export interface Product {
   title: string;
   price: number;
   imageUrl: string;
+  productUrl: string;
   size?: Size;
   color?: Color;
 }
