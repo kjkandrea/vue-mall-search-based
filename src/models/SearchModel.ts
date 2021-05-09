@@ -8,6 +8,7 @@ class SearchModel {
       imageUrl: "https://i.imgur.com/MTGMUN0.jpg",
       size: 85,
       color: "red",
+      productUrl: "",
     },
     {
       title: "버버리 코트",
@@ -15,6 +16,7 @@ class SearchModel {
       imageUrl: "https://i.imgur.com/MTGMUN0.jpg",
       size: 90,
       color: "blue",
+      productUrl: "",
     },
     {
       title: "멋진 코트",
@@ -22,6 +24,7 @@ class SearchModel {
       imageUrl: "https://i.imgur.com/MTGMUN0.jpg",
       size: 100,
       color: "green",
+      productUrl: "",
     },
     {
       title: "예쁜 코트",
@@ -29,6 +32,7 @@ class SearchModel {
       imageUrl: "https://i.imgur.com/MTGMUN0.jpg",
       size: 105,
       color: "white",
+      productUrl: "",
     },
     {
       title: "편한 코트",
@@ -36,6 +40,7 @@ class SearchModel {
       imageUrl: "https://i.imgur.com/MTGMUN0.jpg",
       size: 110,
       color: "black",
+      productUrl: "",
     },
     {
       title: "어려운이름 코트",
@@ -43,6 +48,7 @@ class SearchModel {
       imageUrl: "https://i.imgur.com/MTGMUN0.jpg",
       size: 90,
       color: "red",
+      productUrl: "",
     },
   ];
 
