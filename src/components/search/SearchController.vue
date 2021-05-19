@@ -68,9 +68,16 @@ export default class SearchController extends Vue {
   }
 
   private onSubmit() {
+    const prevKeyword = this.$route.query?.keyword?.toString();
+
     this.pushQuery();
+
+    const nextKeyword = this.$route.query?.keyword?.toString();
+
     this.searchProduct();
-    this.searchFilter();
+    if (prevKeyword === undefined || prevKeyword !== nextKeyword) {
+      this.searchFilter();
+    }
   }
 
   private pushQuery(): void {
