@@ -29,11 +29,13 @@ export default class SearchController extends Vue {
 
   private filter: Filter[] = [];
 
-  created(): void {
+  async created(): void {
     const hasKeywordQuery = this.parseKeywordQuery();
     if (hasKeywordQuery) {
       this.searchProduct();
-      this.searchFilter();
+      await this.searchFilter();
+      const filterKeyNames = this.filter.map(({ name }) => name);
+      this.parseFilterQuery(filterKeyNames);
     }
   }
 
@@ -46,6 +48,20 @@ export default class SearchController extends Vue {
     if (!keyword) return false;
     this.query.keyword = keyword.toString();
     return true;
+  }
+
+  private parseFilterQuery(filterKeyNames: string[]): boolean {
+    const queryBuffet = this.$route.query;
+    const matchedQuery = filterKeyNames.reduce((acc, keyName) => {
+      const value = queryBuffet[keyName];
+      if (value) acc.push({ [keyName]: value });
+      return acc;
+    }, []);
+    if (matchedQuery.length > 0) {
+      this.query.filters = matchedQuery;
+      return true;
+    }
+    return false;
   }
 
   private onSubmit() {
