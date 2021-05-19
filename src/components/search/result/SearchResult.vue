@@ -13,8 +13,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { Product } from "../../types/model";
-import ProductItem from "./result/ProductItem.vue";
+import { Product } from "../../../types/model";
+import ProductItem from "./ProductItem.vue";
 @Component({
   components: { ProductItem },
 })
