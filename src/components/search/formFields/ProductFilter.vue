@@ -15,6 +15,7 @@ import { Vue, Component, Prop, PropSync, Watch } from "vue-property-decorator";
 import CheckButtons from "../../common/inputs/CheckButtons.vue";
 import { Filter, RequestFilter } from "../../../types/model";
 import { objectMap } from "../../../utils";
+import { InstanceFilter } from "../../../types/instance";
 
 @Component({
   components: { CheckButtons },
@@ -25,7 +26,7 @@ export default class ProductFilter extends Vue {
   @PropSync("filter", { required: true })
   private filterSync!: RequestFilter;
 
-  private checkedFilter: { [key: string]: string[] } = {};
+  private checkedFilter: InstanceFilter = {};
 
   @Watch("data")
   changedData(value: Filter[]): void {
@@ -35,7 +36,9 @@ export default class ProductFilter extends Vue {
 
   @Watch("filterSync")
   changedDefaultFilter(val: RequestFilter): void {
-    console.log(val);
+    this.checkedFilter = objectMap<string, string[]>(val, (value) =>
+      value.split(",")
+    );
   }
 
   private initFilter() {
