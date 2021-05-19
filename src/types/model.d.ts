@@ -1,6 +1,8 @@
+export type RequestFilter = { [key: string]: string };
+
 export interface SearchRequest {
   keyword?: string;
-  filters?: { [key: string]: string };
+  filters?: RequestFilter;
 }
 
 export interface SearchResponse {

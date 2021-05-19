@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, PropSync, Watch } from "vue-property-decorator";
 import CheckButtons from "../../common/inputs/CheckButtons.vue";
-import { Filter } from "../../../types/model";
+import { Filter, RequestFilter } from "../../../types/model";
 import { objectMap } from "../../../utils";
 
 @Component({
@@ -23,7 +23,7 @@ export default class ProductFilter extends Vue {
   @Prop({ required: true })
   private readonly data!: Filter[];
   @PropSync("filter", { required: true })
-  private filterSync!: { [key: string]: string };
+  private filterSync!: RequestFilter;
 
   private checkedFilter: { [key: string]: string[] } = {};
 
@@ -31,6 +31,11 @@ export default class ProductFilter extends Vue {
   changedData(value: Filter[]): void {
     if (value.length > 0) this.initFilter();
     this.$forceUpdate();
+  }
+
+  @Watch("filterSync")
+  changedDefaultFilter(val: RequestFilter): void {
+    console.log(val);
   }
 
   private initFilter() {

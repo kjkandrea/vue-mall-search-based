@@ -14,7 +14,7 @@ import { Vue, Component } from "vue-property-decorator";
 import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
 import { isEqual, isEmpty } from "lodash";
-import { Filter, SearchRequest } from "../../types/model";
+import { Filter, RequestFilter, SearchRequest } from "../../types/model";
 import searchModel from "../../models/SearchModel";
 import filterModel from "../../models/FilterModel";
 
@@ -52,11 +52,14 @@ export default class SearchController extends Vue {
 
   private parseFilterQuery(filterKeyNames: string[]): boolean {
     const queryBuffet = this.$route.query;
-    const matchedQuery = filterKeyNames.reduce((acc, keyName) => {
-      const value = queryBuffet[keyName];
-      if (value) Object.assign(acc, { [keyName]: value });
-      return acc;
-    }, {});
+    const matchedQuery: RequestFilter = filterKeyNames.reduce(
+      (acc, keyName) => {
+        const value = queryBuffet[keyName];
+        if (value) Object.assign(acc, { [keyName]: value });
+        return acc;
+      },
+      {}
+    );
     if (!isEmpty(matchedQuery)) {
       this.query.filters = matchedQuery;
       return true;
