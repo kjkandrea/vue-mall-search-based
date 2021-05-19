@@ -1,7 +1,11 @@
 <template>
   <form @submit.prevent="onSubmit">
     <keyword-input :keyword.sync="query.keyword" />
-    <product-filter />
+    <product-filter
+      :filter.sync="query.filters"
+      :data="filter"
+      @change:query="onSubmit"
+    />
   </form>
 </template>
 
@@ -10,9 +14,9 @@ import { Vue, Component } from "vue-property-decorator";
 import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
 import { isEqual } from "lodash";
-import { SearchRequest } from "../../types";
-import { Dictionary } from "vue-router/types/router";
+import { Filter, SearchRequest } from "../../types";
 import searchModel from "../../models/SearchModel";
+import filterModel from "../../models/FilterModel";
 
 @Component({
   components: { ProductFilter, KeywordInput },
@@ -20,11 +24,17 @@ import searchModel from "../../models/SearchModel";
 export default class SearchController extends Vue {
   private query: SearchRequest = {
     keyword: "",
+    filters: {},
   };
+
+  private filter: Filter[] = [];
 
   created(): void {
     const hasQuery = this.initQuery();
-    if (hasQuery) this.search();
+    if (hasQuery) {
+      this.searchProduct();
+      this.searchFilter();
+    }
   }
 
   /**
@@ -40,21 +50,33 @@ export default class SearchController extends Vue {
 
   private onSubmit() {
     this.pushQuery();
-    this.search();
+    this.searchProduct();
+    this.searchFilter();
   }
 
   private pushQuery(): void {
     const equal = isEqual(this.$route.query, this.query);
 
     if (equal) return;
+    console.log(this.query.filters);
     this.$router.push({
-      query: this.query as Dictionary<string>,
+      query: {
+        keyword: this.query.keyword,
+        ...this.query.filters,
+      },
     });
   }
 
-  private async search() {
+  private async searchProduct() {
     const { data } = await searchModel.get(this.query);
     this.$emit("search:response", data);
+  }
+
+  private async searchFilter() {
+    const { keyword } = this.query;
+    if (keyword === undefined) return;
+    const { data } = await filterModel.get({ keyword });
+    this.filter = data;
   }
 }
 </script>

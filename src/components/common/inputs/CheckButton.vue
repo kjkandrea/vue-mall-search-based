@@ -1,24 +1,48 @@
 <template>
   <div>
-    <label :class="{ checked: value, focus: focus }">
-      <span>항목1</span>
+    <label
+      v-for="option in data"
+      :key="option"
+      :class="{
+        checked: selectedValues.includes(option),
+        focus: option === focusedValue,
+      }"
+    >
+      <span>{{ option }}</span>
       <input
         type="checkbox"
-        v-model="value"
-        @focus="focus = true"
-        @focusout="focus = false"
+        :value="option"
+        v-model="selectedValues"
+        @change="$emit('check', selectedValues)"
+        @focus="onFocus(option)"
+        @focusout="onFocusOut()"
       />
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop, Model } from "vue-property-decorator";
 
 @Component
 export default class CheckButton extends Vue {
-  private readonly value = false;
-  private focus = false;
+  @Model("check")
+  private readonly value!: string[];
+  @Prop({ required: true })
+  private readonly data!: string[];
+
+  private selectedValues: string[] = [];
+  private focusedValue = "";
+
+  private onFocus(value: string) {
+    this.$nextTick(() => {
+      this.focusedValue = value;
+    });
+  }
+
+  private onFocusOut() {
+    this.focusedValue = "";
+  }
 }
 </script>
 

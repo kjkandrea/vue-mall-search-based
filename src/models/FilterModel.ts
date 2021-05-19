@@ -4,14 +4,17 @@ class FilterModel {
   private readonly data: Filter[] = [
     {
       title: "브랜드",
-      options: ["브랜드 1", "브랜드 2", "브랜드 3"],
+      name: "brand",
+      options: ["burberry", "hazzys", "karenin"],
     },
     {
       title: "색상",
+      name: "color",
       options: ["red", "blue", "green", "white", "black"],
     },
     {
       title: "사이즈",
+      name: "size",
       options: ["85", "90", "95", "100", "105", "110"],
     },
   ];
@@ -20,7 +23,9 @@ class FilterModel {
     return new Promise((resolve) => {
       setTimeout(() => {
         if (keyword === undefined) throw new Error("keyword empty");
-        return resolve({ data: this.data });
+        return keyword.includes("코트")
+          ? resolve({ data: this.data })
+          : resolve({ data: [] });
       }, 200);
     });
   }
