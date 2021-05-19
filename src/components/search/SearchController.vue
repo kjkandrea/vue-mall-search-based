@@ -29,7 +29,7 @@ export default class SearchController extends Vue {
 
   private filter: Filter[] = [];
 
-  async created(): void {
+  async created(): Promise<void> {
     const hasKeywordQuery = this.parseKeywordQuery();
     if (hasKeywordQuery) {
       this.searchProduct();
@@ -74,15 +74,15 @@ export default class SearchController extends Vue {
   }
 
   private pushQuery(): void {
-    const equal = isEqual(this.$route.query, this.query);
+    const query = {
+      keyword: this.query.keyword,
+      ...this.query.filters,
+    };
+
+    const equal = isEqual(this.$route.query, query);
 
     if (equal) return;
-    this.$router.push({
-      query: {
-        keyword: this.query.keyword,
-        ...this.query.filters,
-      },
-    });
+    this.$router.push({ query });
   }
 
   private async searchProduct() {
