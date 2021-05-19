@@ -1,0 +1,12 @@
+button {
+  height: $input-height;
+  padding: 0 1rem;
+  border-style: solid;
+  cursor: pointer;
+
+  &[type="submit"] {
+    background-color: $primary;
+    border-color: $primary;
+    color: white;
+  }
+}
