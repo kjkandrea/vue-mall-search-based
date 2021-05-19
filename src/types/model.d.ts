@@ -13,8 +13,8 @@ export interface Product {
   price: number;
   imageUrl: string;
   productUrl: string;
-  size?: Size;
-  color?: Color;
+  size?: number;
+  color?: string;
 }
 
 export interface FilterRequest {

@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { Product } from "../../../types";
+import { Product } from "../../../types/model";
 
 @Component
 export default class ProductItem extends Vue {

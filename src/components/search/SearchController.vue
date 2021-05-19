@@ -14,7 +14,7 @@ import { Vue, Component } from "vue-property-decorator";
 import KeywordInput from "./formFields/KeywordInput.vue";
 import ProductFilter from "./formFields/ProductFilter.vue";
 import { isEqual, isEmpty } from "lodash";
-import { Filter, SearchRequest } from "../../types";
+import { Filter, SearchRequest } from "../../types/model";
 import searchModel from "../../models/SearchModel";
 import filterModel from "../../models/FilterModel";
 

@@ -1,4 +1,4 @@
-import { Product, SearchRequest } from "../types";
+import { Product, SearchRequest } from "../types/model";
 
 class SearchModel {
   private readonly data: Product[] = [

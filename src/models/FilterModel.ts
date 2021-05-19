@@ -1,4 +1,4 @@
-import { Filter, FilterRequest } from "../types";
+import { Filter, FilterRequest } from "../types/model";
 
 class FilterModel {
   private readonly data: Filter[] = [

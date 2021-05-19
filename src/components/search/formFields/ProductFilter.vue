@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, PropSync, Watch } from "vue-property-decorator";
 import CheckButtons from "../../common/inputs/CheckButtons.vue";
-import { Filter } from "../../../types";
+import { Filter } from "../../../types/model";
 import { objectMap } from "../../../utils";
 
 @Component({

@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Model } from "vue-property-decorator";
 import CheckButton from "./CheckButton.vue";
-import { Filter } from "../../../types";
+import { Filter } from "../../../types/model";
 @Component({
   components: { CheckButton },
 })
