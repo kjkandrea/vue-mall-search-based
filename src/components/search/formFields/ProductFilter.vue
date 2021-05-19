@@ -14,14 +14,7 @@
 import { Vue, Component, Prop, PropSync, Watch } from "vue-property-decorator";
 import CheckButtons from "../../common/inputs/CheckButtons.vue";
 import { Filter } from "../../../types";
-
-const objectMap = <ValueType, MappedValueType>(
-  object: { [key: string]: ValueType },
-  callback: (value: ValueType, key?: string, index?: number) => MappedValueType
-) =>
-  Object.fromEntries(
-    Object.entries(object).map(([k, v], i) => [k, callback(v, k, i)])
-  );
+import { objectMap } from "../../../utils";
 
 @Component({
   components: { CheckButtons },
