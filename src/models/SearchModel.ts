@@ -1,4 +1,4 @@
-import { Product, SearchRequest } from "../types";
+import { Product, SearchRequest } from "../types/model";
 
 class SearchModel {
   private readonly data: Product[] = [
@@ -58,6 +58,8 @@ class SearchModel {
       setTimeout(() => {
         if (keyword === undefined) throw new Error("keyword empty");
         const keywordResult = this.keywordSearch(keyword);
+        console.log("GET search response : ");
+        console.log(keywordResult);
         return resolve({ data: keywordResult });
       }, 200);
     });

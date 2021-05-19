@@ -14,7 +14,7 @@ import { Component, Vue } from "vue-property-decorator";
 import SearchLayout from "../components/layouts/SearchLayout.vue";
 import SearchController from "../components/search/SearchController.vue";
 import SearchResult from "../components/search/SearchResult.vue";
-import { Product } from "../types";
+import { Product } from "../types/model";
 
 @Component({
   components: {
