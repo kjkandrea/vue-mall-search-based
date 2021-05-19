@@ -1,6 +1,11 @@
 <template>
   <div>
-    <input type="text" maxlength="50" v-model="keywordSync" />
+    <input
+      type="text"
+      maxlength="50"
+      v-model="keywordSync"
+      placeholder="'코트' 라고 검색해보세요."
+    />
     <button type="submit">검색</button>
   </div>
 </template>
