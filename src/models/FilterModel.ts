@@ -23,9 +23,12 @@ class FilterModel {
     return new Promise((resolve) => {
       setTimeout(() => {
         if (keyword === undefined) throw new Error("keyword empty");
-        return keyword.includes("코트")
-          ? resolve({ data: this.data })
-          : resolve({ data: [] });
+        const response = keyword.includes("코트")
+          ? { data: this.data }
+          : { data: [] };
+        console.log("GET filter response :");
+        console.log(response);
+        return resolve(response);
       }, 200);
     });
   }
