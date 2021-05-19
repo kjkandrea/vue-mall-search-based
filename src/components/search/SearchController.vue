@@ -30,8 +30,8 @@ export default class SearchController extends Vue {
   private filter: Filter[] = [];
 
   created(): void {
-    const hasQuery = this.initQuery();
-    if (hasQuery) {
+    const hasKeywordQuery = this.parseKeywordQuery();
+    if (hasKeywordQuery) {
       this.searchProduct();
       this.searchFilter();
     }
@@ -40,7 +40,7 @@ export default class SearchController extends Vue {
   /**
    * @return default search query includes
    */
-  private initQuery(): boolean {
+  private parseKeywordQuery(): boolean {
     const queryBuffet = this.$route.query;
     const { keyword } = queryBuffet;
     if (!keyword) return false;
@@ -58,7 +58,6 @@ export default class SearchController extends Vue {
     const equal = isEqual(this.$route.query, this.query);
 
     if (equal) return;
-    console.log(this.query.filters);
     this.$router.push({
       query: {
         keyword: this.query.keyword,
